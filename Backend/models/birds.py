@@ -17,7 +17,7 @@ class BirdsModel(db.Model):
     UserId = db.Column(db.Integer, db.ForeignKey('User.Id'), nullable=False)
     user = db.relationship('UsersModel', back_populates='birds')
 
-    birdOfTheDay = db.relationship( 'BirdsOfTheDayModel', back_populates='bird', use_list=False, cascade='all, delete')
+    birdOfTheDay = db.relationship( 'BirdsOfTheDayModel', back_populates='bird', cascade='all, delete')
 
     def __repr__(self):
         return f'''

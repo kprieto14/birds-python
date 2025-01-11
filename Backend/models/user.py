@@ -9,7 +9,7 @@ class UsersModel(db.Model):
     Username = db.Column(db.String, nullable=False)
 
     # Relationships
-    birds = db.relationship('BirdsModel', back_populates='user', cascade='all, delete')
+    birds = db.relationship('BirdsModel', back_populates='user', lazy='dynamic', cascade='all, delete')
 
     def __repr__(self):
         return f'''
