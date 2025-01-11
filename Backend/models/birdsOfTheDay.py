@@ -1,5 +1,9 @@
+import pytz
 from db import db
 from sqlalchemy import func
+from sqlalchemy.exc import SQLAlchemyError
+from flask_smorest import abort
+from datetime import datetime
 from models.birds import BirdsModel
 from models.user import UsersModel
 
@@ -8,11 +12,11 @@ class BirdsOfTheDayModel(db.Model):
 
     Id = db.Column(db.Integer, primary_key=True)
     UserName = db.Column(db.String, nullable=True)
-    ChosenDate = db.Column(db.DateTime, nullable=False, server_default=db.func.now())
+    ChosenDate = db.Column(db.DateTime, nullable=False)
 
     # Relationships
-    BirdId = db.Column(db.Integer, db.ForeignKey('User.Id'), nullable=False)
-    bird = db.relationship('UsersModel', back_populates='birdOfTheDay')
+    BirdId = db.Column(db.Integer, db.ForeignKey('Birds.Id'), nullable=False)
+    bird = db.relationship('BirdsModel', back_populates='birdOfTheDay')
 
     @classmethod
     def choose_new_bird(cls):
@@ -24,12 +28,17 @@ class BirdsOfTheDayModel(db.Model):
         bird, user = chosen_bird
 
         new_bird = cls(
-            UserName={ user.Username },
-            BirdId={ bird.Id }
+            UserName = user.Username,
+            ChosenDate = datetime.now(pytz.UTC),
+            BirdId = bird.Id
         )
 
-        db.session.add(new_bird)
-        db.session.commit()
+        try:
+            db.session.add(new_bird)
+            db.session.commit()
+        except SQLAlchemyError as error:
+            db.session.rollback()
+            abort(500, message = str(error))
 
         return new_bird
 

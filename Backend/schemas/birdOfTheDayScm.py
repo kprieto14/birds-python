@@ -13,7 +13,7 @@ class PlainBirdSchema(Schema):
                                 )
     SeasonCollection = fields.String(required=True, validate=validate.OneOf(seasons))
     HolidayCollection = fields.String(required=False)
-    PhotoUrl = fields.String(required=False)
+    PhotoURL = fields.String(required=False)
     PhotoPublicId = fields.String(required=False)
     PhotoFileName = fields.String(required=False)
     UserId = fields.Integer(dump_only=True)
@@ -25,4 +25,4 @@ class PlainBirdOfTheDaySchema(Schema):
     BirdId = fields.Integer(dump_only=True)
 
 class BirdOfTheDaySchema(PlainBirdOfTheDaySchema):
-    BirdOfTheDay = fields.Nested(PlainBirdSchema, dump_only=True)
+    bird = fields.Nested(PlainBirdSchema, dump_only=True)

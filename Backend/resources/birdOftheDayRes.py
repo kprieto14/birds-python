@@ -1,9 +1,9 @@
-from datetime import date
-from db import db
-from flask import request
-from sqlalchemy.exc import SQLAlchemyError, IntegrityError
+from datetime import datetime
 from flask.views import MethodView
-from flask_smorest import Blueprint, abort
+from flask_smorest import Blueprint
+from sqlalchemy import func
+import pytz
+from db import db
 from models.birdsOfTheDay import BirdsOfTheDayModel
 from schemas.birdOfTheDayScm import BirdOfTheDaySchema
 
@@ -14,8 +14,10 @@ class BirdOfTheDay(MethodView):
     @blueprint.response(200, BirdOfTheDaySchema)
     def get(self):
         """Get the bird of the day, if it is out of date, make a new one"""
+        today_utc = datetime.now(pytz.UTC).date()
+
         bird_of_day = db.session.query(BirdsOfTheDayModel)\
-                        .filter(BirdsOfTheDayModel.ChosenDate == date.today())\
+                        .filter(func.date(BirdsOfTheDayModel.ChosenDate) == today_utc)\
                         .first()
 
         if bird_of_day == None:

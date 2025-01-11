@@ -9,7 +9,7 @@ class BirdsModel(db.Model):
     YearPublished = db.Column(db.Integer, nullable=False)
     SeasonCollection = db.Column(db.String, nullable=False)
     HolidayCollection = db.Column(db.String, nullable=True)
-    PhotoUrl = db.Column(db.String, nullable=True)
+    PhotoURL = db.Column(db.String, nullable=True)
     PhotoPublicId = db.Column(db.String, nullable=True)
     PhotoFileName = db.Column(db.String, nullable=True)
 

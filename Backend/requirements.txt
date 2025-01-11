@@ -8,3 +8,4 @@ psycopg2-binary
 passlib
 flask-cors
 Flask-Migrate
+pytz
