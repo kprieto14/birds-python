@@ -1,0 +1,1 @@
+from resources.birdOftheDayRes import blueprint as BirdOfTheDayBlueprint

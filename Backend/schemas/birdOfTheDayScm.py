@@ -9,7 +9,6 @@ class PlainBirdSchema(Schema):
     AdoptedFrom = fields.String(required=False)
     YearPublished = fields.Integer(
                                     required=True,
-                                    validate=validate.Length(min=4, max=4),
                                     validate=validate.Range(min=2022, max=datetime.now().year)
                                 )
     SeasonCollection = fields.String(required=True, validate=validate.OneOf(seasons))

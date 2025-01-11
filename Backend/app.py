@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from config.database import configure_database
 from config.api import configure_api_settings
+from resources import blueprints
 import models
 
 def create_app():
@@ -15,6 +16,7 @@ def create_app():
     api = configure_api_settings(app)
     
     # Register blueprints here
+    api.register_blueprint(blueprints.BirdOfTheDayBlueprint)
     
     return app
 

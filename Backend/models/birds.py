@@ -14,7 +14,7 @@ class BirdsModel(db.Model):
     PhotoFileName = db.Column(db.String, nullable=True)
 
     # Relationships
-    UserId = db.Column(db.Integer, db.ForeignKey('User.Id'), nullable=False)
+    UserId = db.Column(db.Integer, db.ForeignKey('Users.Id'), nullable=False)
     user = db.relationship('UsersModel', back_populates='birds')
 
     birdOfTheDay = db.relationship( 'BirdsOfTheDayModel', back_populates='bird', cascade='all, delete')
