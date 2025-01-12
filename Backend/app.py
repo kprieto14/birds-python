@@ -10,7 +10,7 @@ def create_app():
     
     # Configure CORS
     CORS(app, origins=['http://localhost:5000'])
-    
+
     # Initialize components
     migrate = configure_database(app)
     api = configure_api_settings(app)
@@ -23,4 +23,4 @@ def create_app():
 app = create_app()
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    app.run(port=5002)

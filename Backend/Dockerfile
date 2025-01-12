@@ -10,8 +10,7 @@ RUN apt-get update && apt-get install -y \
     gcc \
     git \
     curl \
-    telnet \
-    openssh-client
+    telnet
     
 # Copy the dependencies file to the working directory
 COPY requirements.txt requirements.txt
@@ -22,8 +21,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the code to the working directory
 COPY . .
 
-# Make port 5001 available to the world outside this container
-EXPOSE 5001
+# Make port 5002 available to the world outside this container
+EXPOSE 5002
 
 # Define environment variable
 ENV FLASK_APP=app

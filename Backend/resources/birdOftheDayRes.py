@@ -1,8 +1,8 @@
+import pytz
 from datetime import datetime
 from flask.views import MethodView
 from flask_smorest import Blueprint
 from sqlalchemy import func
-import pytz
 from db import db
 from models.birdsOfTheDay import BirdsOfTheDayModel
 from schemas.birdOfTheDayScm import BirdOfTheDaySchema

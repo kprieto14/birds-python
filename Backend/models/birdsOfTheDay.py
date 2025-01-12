@@ -1,9 +1,9 @@
 import pytz
-from db import db
 from sqlalchemy import func
 from sqlalchemy.exc import SQLAlchemyError
 from flask_smorest import abort
 from datetime import datetime
+from db import db
 from models.birds import BirdsModel
 from models.user import UsersModel
 
