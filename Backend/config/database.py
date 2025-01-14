@@ -25,5 +25,4 @@ def configure_database(app: Flask) -> Migrate:
         print("Error connecting to database")
         print(e)
 
-    # Only needed if I plan on running migrations with python
     return Migrate(app, db)

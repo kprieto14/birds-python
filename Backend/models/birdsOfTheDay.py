@@ -25,6 +25,9 @@ class BirdsOfTheDayModel(db.Model):
                         .order_by(func.random())\
                         .first()
 
+        if not chosen_bird:
+            abort(404, message="No birds found in database")
+
         bird, user = chosen_bird
 
         new_bird = cls(

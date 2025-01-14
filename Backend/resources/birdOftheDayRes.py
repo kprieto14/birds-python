@@ -2,7 +2,7 @@ import pytz
 from datetime import datetime
 from flask.views import MethodView
 from flask_smorest import Blueprint
-from sqlalchemy import func
+from sqlalchemy import Date, cast, func
 from db import db
 from models.birdsOfTheDay import BirdsOfTheDayModel
 from schemas.birdOfTheDayScm import BirdOfTheDaySchema
@@ -17,7 +17,8 @@ class BirdOfTheDay(MethodView):
         today_utc = datetime.now(pytz.UTC).date()
 
         bird_of_day = db.session.query(BirdsOfTheDayModel)\
-                        .filter(func.date(BirdsOfTheDayModel.ChosenDate) == today_utc)\
+                        .filter(cast(BirdsOfTheDayModel.ChosenDate, Date) == today_utc)\
+                        .order_by(BirdsOfTheDayModel.ChosenDate.desc())\
                         .first()
 
         if bird_of_day == None:
