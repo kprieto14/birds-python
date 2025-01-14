@@ -1,5 +1,5 @@
 from datetime import datetime
-from marshmallow import Schema, fields, validate, validates_schema
+from marshmallow import Schema, fields, validate
 
 seasons = [ 'Spring', 'Summer', 'Fall', 'Winter' ]
 
@@ -9,7 +9,7 @@ class PlainBirdSchema(Schema):
     AdoptedFrom = fields.String(required=False)
     YearPublished = fields.Integer(
                                     required=True,
-                                    validate=validate.Range(min=2022, max=datetime.now().year)
+                                    validate=validate.Range(min=2002, max=datetime.now().year)
                                 )
     SeasonCollection = fields.String(required=True, validate=validate.OneOf(seasons))
     HolidayCollection = fields.String(required=False)
