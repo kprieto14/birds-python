@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     telnet
-    
+
 # Copy the dependencies file to the working directory
 COPY requirements.txt requirements.txt
 
@@ -23,9 +23,6 @@ COPY . .
 
 # Make port 5002 available to the world outside this container
 EXPOSE 5002
-
-# Define environment variable
-ENV FLASK_APP=app
 
 # Run app.py when the container launches
 CMD ["tail", "-f", "/dev/null"]

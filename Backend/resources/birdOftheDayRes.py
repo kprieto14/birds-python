@@ -2,7 +2,7 @@ import pytz
 from datetime import datetime
 from flask.views import MethodView
 from flask_smorest import Blueprint
-from sqlalchemy import Date, cast, func
+from sqlalchemy import Date, cast
 from db import db
 from models.birdsOfTheDay import BirdsOfTheDayModel
 from schemas.birdOfTheDayScm import BirdOfTheDaySchema
